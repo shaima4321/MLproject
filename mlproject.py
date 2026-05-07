@@ -446,7 +446,7 @@ if page == "Dashboard":
 
         ordered_labels = ["High", "Medium", "Low"]
         ordered_values = [35.5, 33.5, 31.5]
-        display_percentages = ["35.5%", "33.5%", "31.5%"]
+        display_percentages = ["35.5%", "33.5%", "31.0%"]
 
 
         def fixed_autopct(values):
