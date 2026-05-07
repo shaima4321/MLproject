@@ -594,24 +594,17 @@ elif page == "Model Results":
 
 elif page == "Prediction":
 
-
     st.markdown('<div class="section-title">Predict New Student GPA Level</div>', unsafe_allow_html=True)
-
 
     st.info("The prediction uses Logistic Regression because it achieved the highest test accuracy: 53%.")
 
-
     user_input = {}
-
-
     cols = st.columns(2)
 
-
     for i, col in enumerate(X.columns):
-        min_value = float(df_clean[col].min())
-        max_value = float(df_clean[col].max())
-        mean_value = float(df_clean[col].mean())
-
+        min_value = int(df_clean[col].min())
+        max_value = int(df_clean[col].max())
+        mean_value = int(round(df_clean[col].mean()))
 
         with cols[i % 2]:
             user_input[col] = st.slider(
@@ -619,15 +612,14 @@ elif page == "Prediction":
                 min_value=min_value,
                 max_value=max_value,
                 value=mean_value,
-                step=0.01
+                step=1,
+                format="%d"
             )
-
 
     if st.button("Predict GPA Level"):
         input_df = pd.DataFrame([user_input])
         pred = best_model.predict(input_df)[0]
         pred_label = label_map.get(pred, str(pred))
-
 
         st.markdown(f"""
         <div class="result-card">
@@ -637,7 +629,6 @@ elif page == "Prediction":
             <p>Test Accuracy: 53%</p>
         </div>
         """, unsafe_allow_html=True)
-
 
 
 
